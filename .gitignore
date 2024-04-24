@@ -5,6 +5,10 @@ Modules_*/
 
 *build_times.txt
 
+GCC13/
+NAG/
+IFX/
+
 ## Fortran ##
 
 # Prerequisites
