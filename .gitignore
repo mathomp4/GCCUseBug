@@ -3,11 +3,13 @@
 # Ignore all directories called Modules_*
 Modules_*/
 
-*build_times.txt
-
 GCC13/
 NAG/
 IFX/
+
+*build_times.txt
+*.png
+*.tar.gz
 
 ## Fortran ##
 

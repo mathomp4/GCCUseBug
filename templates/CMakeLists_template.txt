@@ -9,6 +9,11 @@ project(FortranProject
 # Set our compiler flags. We will use debug flags for now
 set(CMAKE_Fortran_FLAGS_DEBUG "-O0 -g")
 
+# If our compiler is NAG, we also append '-quiet' to the flags
+if(CMAKE_Fortran_COMPILER_ID STREQUAL "NAG")
+  set(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG} -quiet")
+endif()
+
 set_property(GLOBAL PROPERTY RULES_MESSAGES OFF)
 set_property(GLOBAL PROPERTY TARGET_MESSAGES OFF)
 set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CMAKE_COMMAND} -E time")
