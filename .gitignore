@@ -3,6 +3,8 @@
 # Ignore all directories called Modules_*
 Modules_*/
 
+*build_times.txt
+
 ## Fortran ##
 
 # Prerequisites
