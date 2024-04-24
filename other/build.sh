@@ -22,7 +22,12 @@ for i in $(ls -d Modules_* | sort -V); do
     # Build the tests
     echo "Building in $i"
     # Capture the build time into a file in the Modules_N directory
-    cmake --build $i/build > $i/build_time.txt 2>&1
+    # NOTE: We are using --parallel here to take advantage of the
+    #       fact that the modules other than base do not depend on
+    #       each other. But if you are having issues you can change
+    #       the number of jobs here by either doing "--parallel 8"
+    #       say, or setting CMAKE_BUILD_PARALLEL_LEVEL=8 in the environment
+    cmake --build --parallel $i/build > $i/build_time.txt 2>&1
 
     # In the build_time.txt file, the second to last line
     # contains the build time:
