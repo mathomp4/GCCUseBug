@@ -7,8 +7,7 @@ project(FortranProject
     LANGUAGES Fortran)
 
 # Set our compiler flags. We will use debug flags for now
-# First for GNU
-#set(CMAKE_Fortran_FLAGS_DEBUG "-O0 -g -fcheck=all,no-array-temps -finit-real=snan -save-temps -ffree-line-length-none -fno-range-check -Wno-missing-include-dirs -fbacktrace -Wno-unused-dummy-argument -ffpe-trap=zero,overflow -fbacktrace -fallow-argument-mismatch -fallow-invalid-boz -falign-commons -fPIE -fopenmp")
+set(CMAKE_Fortran_FLAGS_DEBUG "-O0 -g")
 
 set_property(GLOBAL PROPERTY RULES_MESSAGES OFF)
 set_property(GLOBAL PROPERTY TARGET_MESSAGES OFF)
