@@ -23,14 +23,15 @@ import shutil
 
 def parse_args():
     import argparse
-    parser = argparse.ArgumentParser(description="Create Fortran modules for testing")
-    parser.add_argument("--max-modules", 
-                        type=int, 
-                        default=100, 
+    parser = argparse.ArgumentParser(description="Create Fortran modules for testing",
+                                     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument("--max-modules",
+                        type=int,
+                        default=100,
                         help="Maximum number of modules to create (must be a multiple of 10)")
-    parser.add_argument("--num-subs", 
-                        type=int, 
-                        default=10, 
+    parser.add_argument("--num-subs",
+                        type=int,
+                        default=10,
                         help="Number of subroutines per module")
     return parser.parse_args()
 

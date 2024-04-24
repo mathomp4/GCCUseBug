@@ -21,8 +21,8 @@ Create Fortran modules for testing
 options:
   -h, --help            show this help message and exit
   --max-modules MAX_MODULES
-                        Maximum number of modules to create (must be a multiple of 10)
-  --num-subs NUM_SUBS   Number of subroutines per module
+                        Maximum number of modules to create (must be a multiple of 10) (default: 100)
+  --num-subs NUM_SUBS   Number of subroutines per module (default: 10)
 ```
 
 As can be seen it has two options:
