@@ -18,7 +18,7 @@ for i in $(ls -d Modules_* | sort -V); do
     num=$(echo $i | sed 's/Modules_//')
     # Run cmake
     echo "Running cmake in $i"
-    cmake -S $i -B $i/build -DCMAKE_BUILD_TYPE=Debug --fresh > /dev/null 2>&1
+    cmake -S $i -B $i/build -DCMAKE_BUILD_TYPE=Debug -G Ninja --fresh > /dev/null 2>&1
     # Build the tests
     echo "Building tests in $i"
     # Capture the build time into a file in the Modules_N directory
