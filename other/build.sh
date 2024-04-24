@@ -20,7 +20,7 @@ for i in $(ls -d Modules_* | sort -V); do
     echo "Running cmake in $i"
     cmake -S $i -B $i/build -DCMAKE_BUILD_TYPE=Debug --fresh > /dev/null 2>&1
     # Build the tests
-    echo "Building tests in $i"
+    echo "Building in $i"
     # Capture the build time into a file in the Modules_N directory
     cmake --build $i/build > $i/build_time.txt 2>&1
 
@@ -31,7 +31,7 @@ for i in $(ls -d Modules_* | sort -V); do
     # and then use awk to get the build time and store it
     # in a dictionary based on the number of the module
     time=$(tail -2 $i/build_time.txt | head -1 | awk '{print $4}')
-    echo "Build time for $i: $time seconds"
+    echo "Build time for base.F90 in $i: $time seconds"
     time_dict[$num]=$time
 
 done
