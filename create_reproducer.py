@@ -27,7 +27,7 @@ def parse_args():
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument("--max-modules",
                         type=int,
-                        default=100,
+                        default=50,
                         help="Maximum number of modules to create (must be a multiple of 10)")
     parser.add_argument("--num-subs",
                         type=int,
