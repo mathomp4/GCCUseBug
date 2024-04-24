@@ -13,6 +13,11 @@
 # Then we will output the build times to screen in
 # a nice table format
 
+# NOTE: We are using parallel make here to take advantage of the
+#       fact that the modules other than base do not depend on
+#       If you wish to use less cores, change this number
+export CMAKE_BUILD_PARALLEL_LEVEL=8
+
 for i in $(ls -d Modules_* | sort -V); do
     # Get the number from the directory name
     num=$(echo $i | sed 's/Modules_//')
@@ -22,12 +27,7 @@ for i in $(ls -d Modules_* | sort -V); do
     # Build the tests
     echo "Building in $i"
     # Capture the build time into a file in the Modules_N directory
-    # NOTE: We are using --parallel here to take advantage of the
-    #       fact that the modules other than base do not depend on
-    #       each other. But if you are having issues you can change
-    #       the number of jobs here by either doing "--parallel 8"
-    #       say, or setting CMAKE_BUILD_PARALLEL_LEVEL=8 in the environment
-    cmake --build --parallel $i/build > $i/build_time.txt 2>&1
+    cmake --build $i/build > $i/build_time.txt 2>&1
 
     # In the build_time.txt file, the second to last line
     # contains the build time:
