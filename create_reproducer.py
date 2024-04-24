@@ -94,7 +94,7 @@ def main():
         # Now we template the CMakelists.txt file using the template
         #  templates/CMakelists_template.txt
         # and put it in our Modules_N directory
-        cmake_template = templateEnv.get_template("CMakelists_template.txt")
+        cmake_template = templateEnv.get_template("CMakeLists_template.txt")
         with open("{}/Modules_{}/CMakeLists.txt".format(overall_directory, num_modules), "w") as f:
             f.write(cmake_template.render(num_modules=num_modules))
 
