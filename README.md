@@ -13,8 +13,7 @@ To run this reproducer you will need:
 
 To create a reproducible test case, use the `create_reproducer.py` script:
 ```bash
-$ ./create_reproducer.py -h
-usage: create_reproducer.py [-h] [--max-modules MAX_MODULES] [--num-subs NUM_SUBS]
+usage: create_reproducer.py [-h] [--max-modules MAX_MODULES] [--num-subs NUM_SUBS] [--random-names]
 
 Create Fortran modules for testing
 
@@ -23,11 +22,13 @@ options:
   --max-modules MAX_MODULES
                         Maximum number of modules to create (must be a multiple of 10) (default: 50)
   --num-subs NUM_SUBS   Number of subroutines per module (default: 10)
+  --random-names        Use random module names (default: False)
 ```
 
-As can be seen it has two options:
+As can be seen it has three options:
 - `--max-modules`: Maximum number of modules to create (must be a multiple of 10)
 - `--num-subs`: Number of subroutines per module
+- `--random-names`: Use random module names
 
 The script will create a directory with the following structure:
 ```
