@@ -20,7 +20,10 @@ import shutil
 import string
 
 def generate_random_string(length):
-    return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
+    letters = string.ascii_letters
+    first_char = random.choice(string.ascii_letters)
+    rest = ''.join(random.choices(string.ascii_letters + string.digits, k=length - 1))
+    return first_char + rest
 
 # We will use argparse to add commandline arguments for
 # 1. Number of module directories to create (must be a multiple of 10)
