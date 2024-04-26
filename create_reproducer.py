@@ -73,7 +73,10 @@ def main():
     # Now we create a directory called:
     #   Modules_(max_number_of_modules)-Subs_(number_of_subroutines_per_module)
     # where we will store the created modules
+    # we also want to append with -Random if we are using random names
     overall_directory = "Modules_{}-Subs_{}".format(max_number_of_modules, number_of_subroutines_per_module)
+    if random_names:
+        overall_directory += "-Random"
     # If the directory already exists, we will delete it
     if os.path.exists(overall_directory):
         shutil.rmtree(overall_directory)
