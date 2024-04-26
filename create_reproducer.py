@@ -15,11 +15,17 @@
 
 import jinja2
 import os
+import random
 import shutil
+import string
+
+def generate_random_string(length):
+    return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
 # We will use argparse to add commandline arguments for
 # 1. Number of module directories to create (must be a multiple of 10)
 # 2. Number of subroutines per module (default is 10)
+# 3. A flag to enable random module names
 
 def parse_args():
     import argparse
@@ -33,6 +39,9 @@ def parse_args():
                         type=int,
                         default=10,
                         help="Number of subroutines per module")
+    parser.add_argument("--random-names",
+                        action="store_true",
+                        help="Use random module names")
     return parser.parse_args()
 
 def main():
@@ -43,12 +52,16 @@ def main():
     if max_number_of_modules % 10 != 0:
         raise ValueError("max-modules must be a multiple of 10")
     number_of_subroutines_per_module = args.num_subs
+    random_names = args.random_names
 
     # Our templates will be in templates/ directory
     templateLoader = jinja2.FileSystemLoader(searchpath="./templates")
 
     # We will use the default template environment
     templateEnv = jinja2.Environment(loader=templateLoader)
+
+    # Add a filter to generate random strings
+    #templateEnv.filters['random_string'] = generate_random_string
 
     # We will first template the file:
     #  base_template.F90
@@ -84,12 +97,19 @@ def main():
             f.write(base_template.render(num_modules=num_modules))
 
         # We also have a module template that we will use to create the modules
-        module_template = templateEnv.get_template("module_template.F90")
+        if random_names:
+            module_template = templateEnv.get_template("random_name_module_template.F90")
+        else:
+            module_template = templateEnv.get_template("module_template.F90")
 
         # Now we will create the modules using Fortran numbering, starting from 1
         for i in range(1, num_modules+1):
             with open("{}/Modules_{}/module{}.F90".format(overall_directory, num_modules, i), "w") as f:
-                f.write(module_template.render(n=i,num_subs=number_of_subroutines_per_module))
+                if random_names:
+                    random_strings = [generate_random_string(12) for _ in range(number_of_subroutines_per_module+1)]  # Generate a list of random strings
+                    f.write(module_template.render(n=i,random_strings=random_strings))
+                else:
+                    f.write(module_template.render(n=i,num_subs=number_of_subroutines_per_module))
 
         # Now we template the CMakelists.txt file using the template
         #  templates/CMakelists_template.txt
